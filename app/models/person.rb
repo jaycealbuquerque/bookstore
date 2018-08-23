@@ -1,7 +1,8 @@
 class Person < ApplicationRecord
 	validates :name, presence: true, length: { maximum: 50 }
-	validates :email, allow_blank: true, allow_nil: true, uniqueness: true, 
-		format: { with: /\A[a-zA-Z0-9_.-]+@([a-zA-Z0-9_ -]+\.)+[a-zA-Z]{2,4}\z/ }
+	validates_with PersonValidator
+	validates :email, allow_blank: true, allow_nil: true, uniqueness: true,
+	email: { message: 'está com um formato maluco' }
 	validates :born_at, presence: true
 	validate :age_limit
 
